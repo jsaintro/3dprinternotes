@@ -72,19 +72,21 @@ Sketch/Include Library/Add .ZIP Library
 ```
 #define DISABLE_MAX_ENDSTOPS
 ```
+Verify this doesn't break mesh levelling in the next version
 1. Invert the extruder stepper
 ```
 #define INVERT_E0_DIR true
 ```
 1. Set the travel limits (Probably need to retune this)
 ```
-#define X_MAX_POS 210
-#define X_MIN_POS -20
+#define X_MAX_POS 200
+#define X_MIN_POS -5
 #define Y_MAX_POS 190
 #define Y_MIN_POS -10
 #define Z_MAX_POS 165
 #define Z_MIN_POS 0
 ```
+Note: This is after adjusting your Y table far left
 1. Set the homing speeds to something fast yet reasonable
 ```
 #define HOMING_FEEDRATE {150*60, 150*60, 200, 0}
@@ -174,20 +176,21 @@ Note: Need to revisit these settings esp z which could be set at default if we i
 ```
 1. Raise before homing
 ```
-#define Z_RAISE_BEFORE_HOMING 20
+#define Z_RAISE_BEFORE_HOMING 4
 ```
-Note: This is probably too paranoid and could be down at the default of 4
+Note: Assuming you've removed the switch shoe
 1. Travel speed (This can probably be left at the default of 8000)
 ```
-#define XY_TRAVEL_SPEED (100*60)
+#define XY_TRAVEL_SPEED 4000
 ```
 1. Only enable the servo for movement (prevent noise issues)
 ```
-#define PROBE_SERVO_DEACTIVATION_DELAY 300
+#define PROBE_SERVO_DEACTIVATION_DELAY 500
 ```
+Note: consider 500ms to for a little more time
 1. Enable the servo endstop and set the angles
 ```
-#define NUM_SERVOS 3
+#define NUM_SERVOS 1
 #define SERVO_ENDSTOPS {-1, -1, 0}
 #define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 71,155}
 ```
