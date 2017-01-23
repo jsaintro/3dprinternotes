@@ -60,10 +60,33 @@ Adjust so it triggers at 2mm from bed.  Use stacked business cards to determine 
 
 Use G92Z{distance) to set position of z independent of probe
 
-Preheat hotend
-Home Z
-Send G29
-G92Z10 tell printer printhead is 10mm above surface
+# Calculate z height distance
+1. Preheat hotend and preheat bed
+1. Home Z
+```
+G28
+```
+1. Do autolevel procedure
+```
+G29
+```
+1. recalibrate current z pos to 10mm (So we can move down 10mm from current)
+```
+G92Z10
+```
+1. Move z down in .1mm increments untill .7mm feeler is pinched then backoff .1
+1. Determined current position
+```
+M114
+```
+Z = 9.16
+9.16 - 10 = -.84 -.85
+Since trigger is closer than hotend
+
+Offset from ext
+Negative means closer to min endstop. pos means further from min endstop
+
+ calibrate current position to 10mm off bed surface (So we can move below)
 Move Z down in .1mm increments until hotend just touches feeler guage .7??
 
 

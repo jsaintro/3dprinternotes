@@ -75,12 +75,12 @@ Edit in Configuration_adv.h
 #define Z_MAX_POS 165
 ```
 Note: This is after adjusting your Y table far left
-##### STOPPED HERE
 1. Set the homing speeds to something fast yet reasonable
 ```
-#define HOMING_FEEDRATE {150*60, 150*60, 200, 0}
+#define HOMING_FEEDRATE_XY (150*60)
+#define HOMING_FEEDRATE_Z  (3*60)
 ```
-Note: might want to see if z can be set to default
+Note: might want to see if z can be set to default (4*60)
 1. Define servo steps
 ```
 #define DEFAULT_AXIS_STEPS_PER_UNIT   {80,80,3935,102}  // Wilson TS W/.4 nozzle (Fine Tuned)
@@ -99,19 +99,17 @@ Note: Need to revisit these settings esp z which could be set at default if we i
 ```
 1. Set some preheat settings
 ```
-#define PLA_PREHEAT_HPB_TEMP 50
-#define PLA_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
-
-#define ABS_PREHEAT_HOTEND_TEMP 263
-#define ABS_PREHEAT_HPB_TEMP 105
-#define ABS_PREHEAT_FAN_SPEED 0   // Insert Value between 0 and 255
+#define PREHEAT_1_TEMP_BED     50
+#define PREHEAT_2_TEMP_HOTEND 263
+#define PREHEAT_2_TEMP_BED    105
 ```
 # LCD SEtup
 1. Enable the LCD
 ```
 #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 ```
-1. Fix the encoder for the LCD
+1. Fix the encoder for the LCD (Edit in Conditionals_LCD.h)
+```
 #if defined (REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
  #define DOGLCD
  #define U8GLIB_ST7920
@@ -121,13 +119,10 @@ Note: Need to revisit these settings esp z which could be set at default if we i
 #endif
 ```
 1. Disable the sucky beeper and reverse encoder dir
-  1. configure pins.h
+  1. configure pins_RAMPS.h
   2. Search for "REPRAP_DISCOUNT_SMART_CONTROLLER"
-  3. Set `#define BEEPER -1`
+  3. Set `#define BEEPER_PIN -1`
   4. Reverse pins for `BTN_EN1` `BTN_EN2`
-1. Fix the annoyingly long delay for the stop button
-  1. Configure Marlin_main.cpp
-  2. Set `const int KILL_DELAY = 750;`
 1. Save the project
     File/Save
 
@@ -144,6 +139,7 @@ Note: Need to revisit these settings esp z which could be set at default if we i
 # Upload
 1. Sketch/Upload (This will take about 1 minute) You'll see the LCD screen blink when it's done
 
+##### STOPPED HERE
 # Auto Bed levelling
 1. disable the Z Axis
 ```
