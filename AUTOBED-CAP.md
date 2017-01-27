@@ -6,7 +6,11 @@
 # Wiring
 Blue = Ground
 Brown = 12V
-Black = Arduino Z Stop Normally Open Pin (With pullup)
+Black = Schottky Diode (BAT85) Neg Terminal (Black Band)
+Schottky Diode (BAT85) Pos Terminal = Arduino Z Stop Normally Open Pin (With pullup)
+
+# Schottky Diode Magic
+When the sensor is open aka high the Schottky diode is reverse biased and no current flows to sense pin.  So the pullup of the sense pin makes it a logic high.  When the sensor is triggered the sensor goes to ground causing a forward bias of the diode.  This effectively lets the diode flow to ground which causes a logic low on the arduino.  
 
 # Adjustment
 CCW More sensitive
@@ -23,12 +27,12 @@ CW Less Sensitive
 
 * Arduino pin with pullup installed and unattached
   Sense Pullup V 4.897 Vcc 4.921
-* with Sendor attached 5.618V
+* with Sendor attached Same as Pullup
 
 * Unattached 9.90 V
 
 
-* Signal light glows slightly when hooked up to sense pin.
+* Signal light glows slightly when hooked up to sense pin. (If diode isn't working)
 * 33 Ohm current limiting resistor didn't help
 * 50% voltage divider didn't help 
   10K/10K 4.8V when open 1V when grounded.
