@@ -75,6 +75,21 @@ Edit in Configuration_adv.h
 #define Z_MAX_POS 165
 ```
 Note: This is after adjusting your Y table far left
+
+1. Fix Axis Inversion for Wilson
+```
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR false
+#define INVERT_Z_DIR true
+```
+Note Might want to just flip every the stepper cables here
+1. Fix Endstop inversion for Wilson
+```
+#define X_MIN_ENDSTOP_INVERTING true
+#define Y_MIN_ENDSTOP_INVERTING true
+#define Z_MIN_ENDSTOP_INVERTING true
+```
+Note: Might want to flip the endstops mechanically in the future
 1. Set the homing speeds to something fast yet reasonable
 ```
 #define HOMING_FEEDRATE_XY (150*60)
@@ -108,6 +123,7 @@ Note: Need to revisit these settings esp z which could be set at default if we i
 ```
 #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 ```
+NOTE: I think you can fix the encoder in the config.h now
 1. Fix the encoder for the LCD (Edit in Conditionals_LCD.h)
 ```
 #if defined (REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER)
@@ -118,11 +134,18 @@ Note: Need to revisit these settings esp z which could be set at default if we i
  #define ENCODER_STEPS_PER_MENU_ITEM 1
 #endif
 ```
+NOTE: I think you can fix the encoder in the config.h now
 1. Disable the sucky beeper and reverse encoder dir
   1. configure pins_RAMPS.h
   2. Search for "REPRAP_DISCOUNT_SMART_CONTROLLER"
   3. Set `#define BEEPER_PIN -1`
   4. Reverse pins for `BTN_EN1` `BTN_EN2`
+
+1. Add SD support
+```
+#define SDSUPPORT
+```
+
 1. Save the project
     File/Save
 
@@ -138,44 +161,3 @@ Note: Need to revisit these settings esp z which could be set at default if we i
 1. Sketch/Verify/compile
 # Upload
 1. Sketch/Upload (This will take about 1 minute) You'll see the LCD screen blink when it's done
-
-##### STOPPED HERE
-# Auto Bed levelling
-1. disable the Z Axis
-```
-#define DISABLE_Z true
-```
-1. Enable auto bed levelling
-```
-#define ENABLE_AUTO_BED_LEVELING
-```
-1. Measure at 9 points
-```
-#define AUTO_BED_LEVELING_GRID_POINTS 3
-```
-1. Set the extruder offset
-```
-#define X_PROBE_OFFSET_FROM_EXTRUDER -43 // Default -25
-#define Y_PROBE_OFFSET_FROM_EXTRUDER -17 // -29
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -12.4 // Mechanical issue is causeing this to vary + for further - for closer
-```
-1. Raise before homing
-```
-#define Z_RAISE_BEFORE_HOMING 4
-```
-Note: Assuming you've removed the switch shoe
-1. Travel speed (This can probably be left at the default of 8000)
-```
-#define XY_TRAVEL_SPEED 4000
-```
-1. Only enable the servo for movement (prevent noise issues)
-```
-#define PROBE_SERVO_DEACTIVATION_DELAY 500
-```
-Note: consider 500ms to for a little more time
-1. Enable the servo endstop and set the angles
-```
-#define NUM_SERVOS 1
-#define SERVO_ENDSTOPS {-1, -1, 0}
-#define SERVO_ENDSTOP_ANGLES {0,0, 0,0, 71,155}
-```

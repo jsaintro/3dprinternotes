@@ -38,61 +38,95 @@ CW Less Sensitive
   10K/10K 4.8V when open 1V when grounded.
 
 # Mechanical Placement
-Adjust extruder to bed
-Adjust sensor position by putting 1 quarter between it and bed
-You'll be adjusting for sensor to trigger between 2mm and 3mm
+1. Lower extruder till it is almost touching bed ~.5 - 1mm
+2. Move so that sensor is above a binder clip
+3. Adjust sensor so it doesn't hit binder clip
 
+# Test sensor functionality
 1. With sensor untriggered (faint light)
-Send M119 to see if Z endstop is untriggered
-```
-Reporting endstop status
-x_min: open
-y_min: open
-z_min: open
-ok
-```
+    Send M119 to see if Z endstop is untriggered
+    ```
+    Reporting endstop status
+    x_min: open
+    y_min: open
+    z_min: open
+    ok
+    ```
+
 2. Trigger sensor (Strong light)
-```
-Reporting endstop status
-x_min: open
-y_min: open
-z_min: TRIGGERED
-ok
-```
+    ```
+    Reporting endstop status
+    x_min: open
+    y_min: open
+    z_min: TRIGGERED
+    ok
+    ```
+
 3. Adjust pot ccw greater distance from bed cw shorter distance from bed.
 Adjust so it triggers at 2mm from bed.  Use stacked business cards to determine 2 mm
 
 Use G92Z{distance) to set position of z independent of probe
 
 # Calculate z height distance
+1. Disable min software endstops
+```
+#define min_software_endstops false
+```
 1. Preheat hotend and preheat bed
-1. Home Z
+1. Calibrate with top 
+G0 Z150
+G92Z100
+G0 Z170 (increase till you hit top)
+G0 Z100
+
+1. Home Z/Autobed Calib/Pos Extruder
 ```
 G28
-```
-1. Do autolevel procedure
-```
 G29
+G0 X150 F7000
 ```
+
+1. Determine current percieved z pos
+```
+M114
+X:150.00 Y:164.00 **Z:9.02** E:-300.00 Count X: 12000 Y:13120 Z:35569
+```
+
+1. Slowly lower to the bed Until tip is .06mm away via feeler guage
+1. Determine current percieved z pos
+```
+M114
+X:150.00 Y:164.00 **Z:3.52** E:-300.00 Count X: 12000 Y:13120 Z:35569
+```
+
+1. Add current z number to current offset
+Ex. -4 + 3.52 = -.48
+1. Set as z offset
+1. repeat above steps (Calibrate unitl it reads same as feeler guage)
+-.48 + .3 = -.45
+
 1. recalibrate current z pos to 10mm (So we can move down 10mm from current)
 ```
 G92Z10
 ```
-1. Move z down in .1mm increments untill .7mm feeler is pinched then backoff .1
+
+
+1. Move z down in .1mm increments untill .051mm feeler is pinched then backoff .1
 1. Determined current position
 ```
 M114
 ```
 Z = 9.16
-9.16 - 10 = -.84 -.85
+9.16 - 10 = -.84 -1.02 -1.12 -1.15 -5.5=4.53 -4=3.53
 Since trigger is closer than hotend
 
+-1.26
 Offset from ext
 Negative means closer to min endstop. pos means further from min endstop
 
  calibrate current position to 10mm off bed surface (So we can move below)
 Move Z down in .1mm increments until hotend just touches feeler guage .7??
-
+Save in Z_PROBE_OFFSET_FROM_EXTRUDER
 
 # Repeatability
 ```
