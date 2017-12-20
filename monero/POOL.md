@@ -94,7 +94,7 @@ Currency: monero
 Pool address: pool.supportxmr.com:3333
   lowest difficulty is 3333 refer to the port list to change this, difficulty should match your hash rate
 wallet_address: you got this up above
-pool_password: jsaintrocc:james@saint-rossy.net
+pool_password: uniqueid:email
 use_nicehash: false
 use_tls: false
 multi_pool: false
