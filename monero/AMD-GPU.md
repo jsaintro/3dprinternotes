@@ -177,7 +177,9 @@ W Switch towards heatsink
 GPU H/s 574.3 TOT H/s ??? Watt 290
 W Switch towards case and 4 cores
 H/s 577.2 TOT H/s 660 Watt 297 $520.40 TESTING
+W Switch towards case and 5 Cores GPU worksize 1024
+H/s 574.3 TOT H/s 684 Watt 312 $372.04
 W Switch towards case and 8 Cores
 H/s 574.3 TOT H/s 677 Watt 318 $518.60
-W Switch towards case and 4 Cores GPU worksize 1000
-H/s 574.3 TOT H/s 677 Watt 397 $??
+W Switch towards case and 4 Cores GPU worksize 1024
+H/s 589.3 TOT H/s 675 Watt 300 $378.26
