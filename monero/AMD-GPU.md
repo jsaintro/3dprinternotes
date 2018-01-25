@@ -188,3 +188,10 @@ Increase GPU freq by 5%
 Note: 5% seems to be the max for the card before you start seeing errors
 Note: This seems sketchy as you need to adjust voltages which isn't easy to do.
 
+H/s 577.2 TOT H/s 660 Watt 297 $520.40 TESTING
+W Switch towards case and 5 Cores GPU worksize 1024
+H/s 574.3 TOT H/s 684 Watt 312 $372.04
+W Switch towards case and 8 Cores
+H/s 574.3 TOT H/s 677 Watt 318 $518.60
+W Switch towards case and 4 Cores GPU worksize 1024
+H/s 589.3 TOT H/s 675 Watt 300 $378.26
