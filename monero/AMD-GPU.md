@@ -176,8 +176,15 @@ My RX 580
 W Switch towards heatsink
 GPU H/s 574.3 TOT H/s ??? Watt 290
 W Switch towards case and 4 cores
-H/s 577.2 TOT H/s 660 Watt 297 $520.40 TESTING
+H/s 577.2 TOT H/s 660 Watt 297 $520.40
+W Switch towards case and 4 cores I 1024 W 8
+H/s 585.2 TOT H/s 670 Watt 300 $537.88 TESTING
 W Switch towards case and 8 Cores
 H/s 574.3 TOT H/s 677 Watt 318 $518.60
-W Switch towards case and 4 Cores GPU worksize 1000
-H/s 574.3 TOT H/s 677 Watt 397 $??
+
+## Overclocking in linux
+sudo sh -c "echo 5 > /sys/class/drm/card0/device/pp_sclk_od"
+Increase GPU freq by 5%
+Note: 5% seems to be the max for the card before you start seeing errors
+Note: This seems sketchy as you need to adjust voltages which isn't easy to do.
+
