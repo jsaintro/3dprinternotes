@@ -16,3 +16,15 @@
    ./monero-blockchain-import --verify 0 --input-file ./blockchain.raw
 
    ``` 
+
+# Accessing the wallet
+1. Sync first
+  ./monerod
+  wallet: monero-wallet
+  password: see lastpass
+
+1. run wallet cli
+  ./monero-wallet-cli.exe
+  balance
+
+  Note Will need to fully sync first
